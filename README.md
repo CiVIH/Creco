@@ -7,6 +7,41 @@
 - Lightweight HTTP RESTful server embedded.
 - Only binds locally for security.
 - Default server port: `45054`.
+
+#### Creco REST API
+
+Creco embeds a lightweight HTTP RESTful server to facilitate the retrieval of game data. Here's how you can interface with it:
+
+1. **Ping the API**:
+   - **Endpoint**: `GET http://localhost:45054/ping`
+   - **Response**: 
+     - **Status Code**: `200 OK`
+     - **Body**: `OK` (as plain text)
+   - **Purpose**: This endpoint can be used to check if the Creco API server is up and running.
+
+2. **Retrieve the Current Leader**:
+   - **Endpoint**: `GET http://localhost:45054/.creco/leader`
+   - **Response**: 
+     - If a leader is selected:
+       - **Status Code**: `200 OK`
+       - **Body**: `LEADER_<leader>` (as plain text)
+     - If no leader is selected:
+       - **Status Code**: `204 No Content`
+   - **Purpose**: Fetch the current leader being played.
+
+#### Configuration
+
+Upon execution, Creco generates a default `config.toml` in the same directory as its executable. This configuration file provides options to tailor Creco's behavior:
+
+- **Debug Mode**:
+  - `debug = true`: When set to `true`, Creco operates in debug mode. Upon starting the game, a console window will open, providing real-time debug information.
+  
+- **Server Port**:
+  - `port = <desired_port>`: You can specify a different server port for the RESTful API. Replace `<desired_port>` with your desired port number (e.g., `port = 45055`).
+
+#### Logging
+
+Creco features built-in logging to assist with troubleshooting and to keep track of its operations. All log data is written to `creco.log`, allowing you to review any activities or potential issues.
   
 #### How it Works
 
