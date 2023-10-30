@@ -47,14 +47,21 @@ public:
 typedef void(__fastcall* tPlaySound)(__int64, const char*);
 tPlaySound oPlaySound;
 
-void Patched_PlaySound(__int64 a1, const char* soundName)
+void Patched_PlaySound(__int64 a1, const char* cSoundName)
 {
-	oPlaySound(a1, soundName);
+	oPlaySound(a1, cSoundName);
 
-	if (std::string(soundName) == "Play_DawnOfMan_Speech")
+	const std::string soundName(cSoundName);
+
+	if (soundName == "Play_DawnOfMan_Speech")
 	{
 		Logger::Log(Info, "LoadingScreen DawnOfMan Speech was played! Hijacked LeaderType confirmed!");
 		Bridge::Get()->ConfirmLoadingHijack();
+	}
+	else if (soundName == "Main_Menu_Panel_Expand_Top_Level")
+	{
+		Logger::Log(Info, "MainMenu shown! Resetting LeaderType...");
+		Bridge::Get()->ResetLeader();
 	}
 }
 

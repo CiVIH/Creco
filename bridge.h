@@ -56,6 +56,12 @@ public:
 		ms_IsConfirmed = true;
 	}
 
+	void ResetLeader()
+	{
+		ms_LastFoundLeaderType = "";
+		ms_IsConfirmed = false;
+	}
+
 private:
 	httplib::Server m_Server;
 	std::thread m_ServerThread;
